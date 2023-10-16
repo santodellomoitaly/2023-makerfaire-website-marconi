@@ -1,0 +1,305 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ldap Login</title>
+		<style>
+		* {
+		  box-sizing: border-box;
+		}
+
+		[class*="col-"] {
+		  padding: 15px;
+		}
+
+		html {
+		  font-family: "Lucida Sans", sans-serif;
+		}
+
+		.header {
+		  background-color: #ff9900;
+		  color: #ffffff;
+		  padding: 15px;
+		}
+
+		.menu ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		}
+
+		.menu li {
+		  padding: 8px;
+		  margin-bottom: 7px;
+		  background-color: #33b5e5;
+		  color: #ffffff;
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
+
+		.menu li:hover {
+		  background-color: #0099cc;
+		}
+
+		.aside {
+		  background-color: #33b5e5;
+		  padding: 15px;
+		  color: #ffffff;
+		  text-align: center;
+		  font-size: 14px;
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
+
+		.footer {
+		  background-color: #0099cc;
+		  color: #ffffff;
+		  text-align: center;
+		  font-size: 12px;
+		  padding: 15px;
+		}
+		
+		input, textarea, select{
+			width: 100%;
+			min-height: 2.4rem;
+			border-radius: 25px;
+			margin: 20px 0;
+			border: 1px solid #0099cc;
+			font-size: 1.1rem;
+		}
+		
+		input[type='submit'],input[type='button']{
+			background-color: #333;
+			color: #fff;
+			max-width: 100%;
+			min-width: 50%;
+			//"border-radius: 25px;
+			//"margin: 20px 0;
+			font-size: 1.5rem;
+			padding-left: 0px;
+			min-height: 2.8rem;
+			background-color: #00ccff;
+			border: 3px solid #0099cc;
+			opacity: 0.6;
+			transition: 0.3s;
+		}
+	
+		.grid-container {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		@media only screen and (min-width: 600px) {
+		  /* For tablets: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-s-1 {grid-column: span 1;}
+		  .col-s-2 {grid-column: span 2;}
+		  .col-s-3 {grid-column: span 3;}
+		  .col-s-4 {grid-column: span 4;}
+		  .col-s-5 {grid-column: span 5;}
+		  .col-s-6 {grid-column: span 6;}
+		  .col-s-7 {grid-column: span 7;}
+		  .col-s-8 {grid-column: span 8;}
+		  .col-s-9 {grid-column: span 9;}
+		  .col-s-10 {grid-column: span 10;}
+		  .col-s-11 {grid-column: span 11;}
+		  .col-s-12 {grid-column: span 12;}
+		}
+
+		@media only screen and (min-width: 768px) {
+		  /* For desktop: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-1 {grid-column: span 1;}
+		  .col-2 {grid-column: span 2;}
+		  .col-3 {grid-column: span 3;}
+		  .col-4 {grid-column: span 4;}
+		  .col-5 {grid-column: span 5;}
+		  .col-6 {grid-column: span 6;}
+		  .col-7 {grid-column: span 7;}
+		  .col-8 {grid-column: span 8;}
+		  .col-9 {grid-column: span 9;}
+		  .col-10 {grid-column: span 10;}
+		  .col-11 {grid-column: span 11;}
+		  .col-12 {grid-column: span 12;}
+		}
+
+		input, textarea, select{
+				width: 100%;"
+				min-height: 2.4rem;
+				border-radius: 25px;
+				margin: 20px 0;
+				border: 1px solid #0099cc;
+				font-size: 1.1rem;
+		}
+	</style>
+	<script>
+
+		
+		function pushopacity(bid){
+			var btn=document.getElementById(bid);
+			btn.onmousedown='btn.style.opacity="1"';
+			btn.onmouseup='btn.style.opacity="0.6"';
+			btn.ontouchstart='btn.style.opacity="1"';
+			btn.ontouchend='btn.style.opacity="0.6"';
+		}
+	</script>
+</head>
+<body data-rsssl=1 data-rsssl=1>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+	<div class="header">
+	  <h1>Gestione luci soggiorno</h1>
+	</div>
+	<div class="grid-container">
+		<div class="col-4 col-s-3 menu">
+		</div>
+		<div class="col-4 col-s-9 menu">
+		 <h1>Controllo luci</h1>
+		 <div id='form'>
+			<form>
+				<label for='to1'>Soggiorno<label>
+				<input id='to1' name='to1' type='button' value='Toggle1' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+				<br>
+				<label for='to2'>Cucina<label>
+				<input id='to2' name='to2' type='button' value='Toggle2' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+				<br>
+				<label for='to3'>Camera da letto<label>
+				<input id='to3' name='to3' type='button' value='Toggle3' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+				<br>
+				<label for='to4'>Bagno<label>
+				<input id='to4' name='to4' type='button' value='Toggle4' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			</form>
+		 </div>
+		</div>
+		<div class="col-4 col-s-12">
+		</div>
+	</div>
+	<div class="footer">
+		  <p>Resize the browser window to see how the content respond to the resizing.</p>
+	</div>
+		<script>
+		//websocket
+		// Create a client instance
+		var mqttid = "soggiorno-gruppo06";
+		var mqttAddr = "broker.hivemq.com";
+		var wsport = "8000";
+		var mqttProto ="/mqtt"; //default
+		var intopic = "soggiorno/in";
+		var outtopic = "soggiorno/out";
+		var conn;
+		start();
+		function start(){
+			var clientID = mqttid+'_' + parseInt(Math.random() * 100);
+			conn = new Paho.MQTT.Client(mqttAddr, Number(wsport), mqttProto,clientID);
+			//client = new Paho.MQTT.Client("iot.eclipse.org", Number(443), "/wss");
+			//"var conn = new Paho.MQTT.Client('{MA}', Number('{MT}'), clientID);"
+			console.log(conn);
+			console.log('broker:'+mqttAddr+', port:'+wsport+', path:'+mqttProto+', id:'+clientID);
+			// connect the client
+			conn.connect(
+				{
+					cleanSession : false, 
+					onSuccess : onConnect,
+					onFailure : onFailed,
+					keepAliveInterval: 30
+				});
+			function onFailed(err) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('Initial connect request failed. Error message : ' + err.errorMessage); 
+			};
+			function onConnect(resObj) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('onConnect');
+				conn.subscribe(outtopic);
+				console.log('Connected to ' + resObj.uri);
+				if (resObj.reconnect){
+					console.log('It was a result of automatic reconnect.');
+				}
+				// carica parametri di configurazione
+				press(vls[4]);
+			};
+			conn.onMessageArrived = function (e) {
+				console.log('Received: '+e.payloadString);
+				if(e.payloadString){
+					var obj = JSON.parse(e.payloadString);
+					//controlla se è indirizzato al dispositivo associato alla pagina
+					if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
+						console.log('Received: '+e.payloadString);
+						onRcv(e.payloadString);
+					}
+				}else{
+					console.log('Message received error: '+e.payloadString);
+				}
+			};
+			conn.onConnectionLost  = function (resObj) {		
+				//console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
+				if (resObj.reconnect){
+					console.log('Automatic reconnect is currently active.');
+				}else{
+					console.log('Lost connection to host, reconnect in 5 seconds');
+					// Try to reconnect in 5 seconds
+					setTimeout(function(){start()}, 5000);
+				}
+			};
+		};
+		function send(str){
+		    console.log('send: '+str);
+			var msg = new Paho.MQTT.Message(str);
+			msg.destinationName = intopic;
+			console.log('topic: '+msg.destinationName);
+			conn.send(msg);
+		};
+		function press(s){
+			send(s);
+		};
+		//end websocket
+		var iebtn=[0,0,0,0];
+		var vls = ['{"devid":"'+mqttid+'","to1":"255"}','{"devid":"'+mqttid+'","to2":"255"}','{"devid":"'+mqttid+'","to3":"255"}','{"devid":"'+mqttid+'","to4":"255"}','{"devid":"'+mqttid+'","conf":"255"}'];
+		//gestione comandi in uscita
+		//associa listener ad elementi html con un certo id
+		var to1=document.getElementById('to1');
+		var to2=document.getElementById('to2');
+		var to3=document.getElementById('to3');
+		var to4=document.getElementById('to4');
+		to1.addEventListener('click', function(){press(vls[0]);});
+		to2.addEventListener('click', function(){press(vls[1]);});
+		to3.addEventListener('click', function(){press(vls[2]);});
+		to4.addEventListener('click', function(){press(vls[3]);});
+		iebtn=[to1,to2,to3,to4];			
+		//gestione comandi in ingresso
+		//cmd callback
+		function onRcv(d) {
+			//document.getElementById('p').innerHTML = f.data;\n"
+			var obj = JSON.parse(d);
+			console.log('Arrived data');
+			for(x in obj){
+				var el = document.getElementById(x);
+				if(el){  //controlla se il campo esiste nel DOM della pagina
+					//console.log(x);
+					if(x=='to1' || x=='to2' || x=='to3' || x=='to4'){
+						console.log('stato:'+obj[x]); 
+						if(Number(obj[x]) == 1){
+							el.style.backgroundColor = "#b30000";
+						}else{
+							el.style.backgroundColor = "#00ccff";
+						}
+					}
+				}else{
+					//{"devid":"pippo","on1":"0","sp1":"10000","tr1":"50"}
+					//{"devid":"pippo","on1":"1","sp1":"10000","tr1":"10","pr1":"10"}
+					//errori nel json staccano la connessione!!
+				};
+			}
+		}
+		// carica i parametri di configurazione della pagina
+		//document.onload=function(){
+		//	press(vls[4]);
+		//};
+	</script>
+</body>
+</html>
