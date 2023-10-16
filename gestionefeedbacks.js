@@ -68,8 +68,8 @@
 					}
 				}
 				if(x=='{TP}'){//temperatura
-						tmp.innerHTML=obj[x]+' &#176;'+'C';
-						tmp.style.backgroundColor = \"#333\";
+						//tmp.innerHTML=obj[x]+' &#176;'+'C';
+						//tmp.style.backgroundColor = \"#333\";
 					}
 			}else{
 				//{"devid":"pippo","on1":"0","sp1":"10000","tr1":"50"}
