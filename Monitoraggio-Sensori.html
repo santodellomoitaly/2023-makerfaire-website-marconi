@@ -253,7 +253,7 @@
 		start();
 		function start(){
 			var clientID = 'antennone_' + parseInt(Math.random() * 100);
-			conn = new Paho.MQTT.Client('marconicloud.it', 8884, '/ws', clientID);
+			conn = new Paho.MQTT.Client('marconicloud.it', 8884, '/wss', clientID);
 			//"var conn = new Paho.MQTT.Client('{MA}', Number('{MT}'), clientID);
 			console.log(conn);
 			console.log('broker: marconicloud.it, port:8884, path: /, id:'+clientID);
