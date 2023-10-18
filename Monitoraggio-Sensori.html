@@ -289,7 +289,7 @@
 				console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
 				if (resObj.reconnect){
 					console.log('Automatic reconnect is currently active.');
-				}else{"
+				}else{
 					console.log('Lost connection to host, reconnect in 5 seconds');
 					// Try to reconnect in 5 seconds
 					setTimeout(function(){start()}, 5000);
