@@ -248,7 +248,7 @@
 	// Client MQTT
 	//------------------------------------------------------------------------------------		
 	var conn;
-	start('ws://marconicloud.it:8884');
+	start('ws://marconicloud.it:1883');
 	function start(wsServer){
 		conn = new WebSocket(wsServer, ['arduino']);
 		conn.onopen = function () {
