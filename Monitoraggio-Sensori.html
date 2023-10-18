@@ -243,114 +243,23 @@
         </div>
       </div>
     </section>
-        <script>
-	//-----------------------------------------------------------------------------------
-	// Client MQTT
-	//------------------------------------------------------------------------------------		
-	var conn;
-	start('ws://marconicloud.it:1883');
-	function start(wsServer){
-		conn = new WebSocket(wsServer, ['arduino']);
-		conn.onopen = function () {
-			console.log('Connected on: ' + new Date());
-		};
-		conn.onerror = function (e) {
-			console.log('WebSocket Error');
-		};
-		conn.onmessage = function (e) {
-			var obj = JSON.parse(e.data);
-			//if(obj.devid=='{IV}'||obj.devid=='FF'){
-				console.log('Received: '+e.data);
-				onRcv(e.data);
-			//}
-		};
-		conn.onclose = function (e) {
-			console.log('WebSocket connection closed because '+e.reason);
-			conn.close();
-			setTimeout(function(){start(wsServer)}, 5000);
-		};	
-	};
-	function press(s){
-		console.log('press: '+s);
-		if(!isOpen(conn)){
-			conn.close();
-			console.log('reload on press.');
-			start('ws://marconiclod.it:8884');
-		}
-		conn.send(s);
-	};
-	function condsend(arr,i,eid,cs){
-		var el=document.getElementById(eid);
-		var c=arr[i].replace(cs, el.value.trim());
-		conn.send(c);
-		console.log('condsend: '+c);
-	};
-	function actsend(jsn,str,cs){
-		var v=jsn.replace(cs, str.trim());
-		console.log('actsend: '+v+'- subwith:'+str.trim()+'- cs:'+cs);
-		conn.send(v);
-	};
-	function isOpen(ws) { return ws.readyState === ws.OPEN };
-	
-	
-//------------------------------------------------------------------
-// gestione comandi in ingresso
-//------------------------------------------------------------------
-	var currID;
-	var currSensor;
-	//cmd callback
-	function onRcv(d) {
-		//document.getElementById('p').innerHTML = f.data;\n"
-		let obj = JSON.parse(d);
-		//delete obj.utc1; // remove this field
-		//delete obj.isoDateString; // remove this field
-		console.log('Arrived data');
-		for(x in obj){
-			currSensor = -1;
-			console.log('x:'+x);
-			if(x == 'sensorID'){
-				currID = obj[x];// indice di riga
-				console.log('currID:'+currID);
-				//var grpNode = grpContainer.querySelector("[data-grp='"+currGrp+"']");// get target group
-			}else if(x == 'pm10'){
-				currSensor = 4;
-			}else if(x == 'pm25'){
-				currSensor = 5;
-			}else if(x == 'tvoc'){
-				currSensor = 3;
-			}else if(x == 'co2'){
-				currSensor = 2;
-			}else if(x == 'temp'){
-				currSensor = 1;
-			}else if(x == 'press'){
-				currSensor = 0;
-			}
-			if(currSensor >= 0){
-				let key = "sensore"+currID+":"+currSensor;
-				let el = document.getElementById(key);
-				el.innerHTML = Number(obj[x]);
-			}else{
-				//{"devid":"pippo","on1":"0","sp1":"10000","tr1":"50"}
-				//{"devid":"pippo","on1":"1","sp1":"10000","tr1":"10","pr1":"10"}
-				//errori nel json staccano la connessione!!
-			};
-		}
-	}	
-	/*
-	 {
-		  utc2000: utc1,
-		  isodate: isoDateString,
-		  date: DateString,
-		  sensorID: id,
-		  pm10: pm10,
-		  pm25: pm25,
-		  tvoc: 45,
-		  co2: 50,
-		  temp: 34,
-		  press: 100
-	 };
-	*/
-	</script>
-  
+    
+    
+    
+    
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section><span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; right: 20px; bottom: 20px; padding: 20px;" class="u-back-to-top u-border-2 u-border-palette-1-base u-icon u-icon-circle u-opacity u-opacity-85 u-text-black" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
   
 </body></html>
