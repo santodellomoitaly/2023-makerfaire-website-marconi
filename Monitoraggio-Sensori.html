@@ -285,7 +285,7 @@
 					onRcv(e.payloadString);
 				/*if}"*/
 			};
-			conn.onConnectionLost  = function (resObj) {"			
+			conn.onConnectionLost  = function (resObj) {			
 				console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
 				if (resObj.reconnect){
 					console.log('Automatic reconnect is currently active.');
