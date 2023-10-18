@@ -302,18 +302,18 @@
 			msg.destinationName = '{QI}';
 			console.log('topic: '+msg.destinationName);
 			conn.send(msg);
-		};"
+		};
 		function condsend(arr,i,eid,cs){
 			var el=document.getElementById(eid);
 			var c=arr[i].replace(cs, el.value.trim());
 			send(c);
 			console.log('condsend: '+c);
-		};"
+		};
 		function actsend(jsn,str,cs){
 			var v=jsn.replace(cs, str.trim());
 			console.log('actsend: '+v+'-subwith:'+str.trim()+'-cs:'+cs);
 			send(v);
-		};"
+		};
 		function press(s){
 			send(s);
 		};
