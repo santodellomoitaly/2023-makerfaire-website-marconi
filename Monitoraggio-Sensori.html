@@ -268,7 +268,7 @@
 			function onFailed() {
 				//conn.send('Connect ' + new Date());"
 				console.log('Initial connect request failed. Error message : ' + err.errorMessage);
-			};"
+			};
 			function onConnect(resObj) {
 				//"conn.send('Connect ' + new Date());"
 				console.log('onConnect');
@@ -277,14 +277,14 @@
 				if (resObj.reconnect){
 					console.log('It was a result of automatic reconnect.');
 				}
-			};"
+			};
 			conn.onMessageArrived = function (e) {
 				var obj = JSON.parse(e.payloadString);
 				if(obj.devid=='{IV}'||obj.devid=='FF'){
 					console.log('Received: '+e.payloadString);
 					onRcv(e.payloadString);
 				}"
-			};"
+			};
 			conn.onConnectionLost  = function (resObj) {"			
 				console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
 				if (resObj.reconnect){
@@ -294,26 +294,26 @@
 					// Try to reconnect in 5 seconds
 					setTimeout(function(){start()}, 5000);
 				}"
-			};"
-		};"
+			};
+		};
 		function send(str){
 		    console.log('send: '+str);
 			var msg = new Paho.MQTT.Message(str);
 			msg.destinationName = '{QI}';
 			console.log('topic: '+msg.destinationName);
 			conn.send(msg);
-		};"
+		};
 		function condsend(arr,i,eid,cs){
 			var el=document.getElementById(eid);
 			var c=arr[i].replace(cs, el.value.trim());
 			send(c);
 			console.log('condsend: '+c);
-		};"
+		};
 		function actsend(jsn,str,cs){
 			var v=jsn.replace(cs, str.trim());
 			console.log('actsend: '+v+'-subwith:'+str.trim()+'-cs:'+cs);
 			send(v);
-		};"
+		};
 		function press(s){
 			send(s);
 		};
