@@ -280,10 +280,10 @@
 			};
 			conn.onMessageArrived = function (e) {
 				var obj = JSON.parse(e.payloadString);
-				if(obj.devid=='{IV}'||obj.devid=='FF'){
+				/*if(obj.devid=='{IV}'||obj.devid=='FF'){*/
 					console.log('Received: '+e.payloadString);
 					onRcv(e.payloadString);
-				}"
+				/*if}"*/
 			};
 			conn.onConnectionLost  = function (resObj) {"			
 				console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
