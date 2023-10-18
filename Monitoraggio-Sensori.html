@@ -243,138 +243,23 @@
         </div>
       </div>
     </section>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js' type='text/javascript'></script>"
-    <script>
-	//-----------------------------------------------------------------------------------
-	// Client MQTT
-	//------------------------------------------------------------------------------------		
-	// Create a client instance
-		var conn;
-		start();
-		function start(){
-			var clientID = 'antennone_' + parseInt(Math.random() * 100);
-			conn = new Paho.MQTT.Client('marconicloud.it', 8884, '/wss', clientID);
-			//"var conn = new Paho.MQTT.Client('{MA}', Number('{MT}'), clientID);
-			console.log(conn);
-			console.log('broker: marconicloud.it, port:8884, path: /, id:'+clientID);
-			// connect the client
-			conn.connect(
-				{
-					cleanSession : false,
-					onSuccess : onConnect,
-					onFailure : onFailed,
-					keepAliveInterval: 30
-				});
-			function onFailed() {
-				//conn.send('Connect ' + new Date());
-				console.log('Initial connect request failed. Error message : ' + err.errorMessage);
-			};
-			function onConnect(resObj) {
-				//"conn.send('Connect ' + new Date());
-				console.log('onConnect');
-				conn.subscribe('lora/');
-				console.log('Connected to ' + resObj.uri);
-				if (resObj.reconnect){
-					console.log('It was a result of automatic reconnect.');
-				}
-			};
-			conn.onMessageArrived = function (e) {
-				var obj = JSON.parse(e.payloadString);
-				//if(obj.devid=='{IV}'||obj.devid=='FF'){
-					console.log('Received: '+e.payloadString);
-					onRcv(e.payloadString);
-				//}
-			};
-			conn.onConnectionLost  = function (resObj) {	
-				console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
-				if (resObj.reconnect){
-					console.log('Automatic reconnect is currently active.');
-				}else{
-					console.log('Lost connection to host, reconnect in 5 seconds');
-					// Try to reconnect in 5 seconds
-					setTimeout(function(){start()}, 5000);
-				}
-			};
-		};
-		function send(str){
-		    console.log('send: '+str);
-			var msg = new Paho.MQTT.Message(str);
-			msg.destinationName = '{QI}';
-			console.log('topic: '+msg.destinationName);
-			conn.send(msg);
-		};
-		function condsend(arr,i,eid,cs){
-			var el=document.getElementById(eid);
-			var c=arr[i].replace(cs, el.value.trim());
-			send(c);
-			console.log('condsend: '+c);
-		};
-		function actsend(jsn,str,cs){
-			var v=jsn.replace(cs, str.trim());
-			console.log('actsend: '+v+'-subwith:'+str.trim()+'-cs:'+cs);
-			send(v);
-		};
-		function press(s){
-			send(s);
-		};
-//------------------------------------------------------------------
-// gestione comandi in ingresso
-//------------------------------------------------------------------
-	var currID;
-	var currSensor;
-	//cmd callback
-	function onRcv(d) {
-		//document.getElementById('p').innerHTML = f.data;\n"
-		let obj = JSON.parse(d);
-		//delete obj.utc1; // remove this field
-		//delete obj.isoDateString; // remove this field
-		console.log('Arrived data');
-		for(x in obj){
-			currSensor = -1;
-			console.log('x:'+x);
-			if(x == 'sensorID'){
-				currID = obj[x];// indice di riga
-				console.log('currID:'+currID);
-				//var grpNode = grpContainer.querySelector("[data-grp='"+currGrp+"']");// get target group
-			}else if(x == 'pm10'){
-				currSensor = 4;
-			}else if(x == 'pm25'){
-				currSensor = 5;
-			}else if(x == 'tvoc'){
-				currSensor = 3;
-			}else if(x == 'co2'){
-				currSensor = 2;
-			}else if(x == 'temp'){
-				currSensor = 1;
-			}else if(x == 'press'){
-				currSensor = 0;
-			}
-			if(currSensor >= 0){
-				let key = "sensore"+currID+":"+currSensor;
-				let el = document.getElementById(key);
-				el.innerHTML = Number(obj[x]);
-			}else{
-				//{"devid":"pippo","on1":"0","sp1":"10000","tr1":"50"}
-				//{"devid":"pippo","on1":"1","sp1":"10000","tr1":"10","pr1":"10"}
-				//errori nel json staccano la connessione!!
-			};
-		}
-	}	
-	/*
-	 {
-		  utc2000: utc1,
-		  isodate: isoDateString,
-		  date: DateString,
-		  sensorID: id,
-		  pm10: pm10,
-		  pm25: pm25,
-		  tvoc: 45,
-		  co2: 50,
-		  temp: 34,
-		  press: 100
-	 };
-	*/
-	</script>
-  
+    
+    
+    
+    
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section><span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; right: 20px; bottom: 20px; padding: 20px;" class="u-back-to-top u-border-2 u-border-palette-1-base u-icon u-icon-circle u-opacity u-opacity-85 u-text-black" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
   
 </body></html>
