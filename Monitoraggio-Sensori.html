@@ -249,10 +249,10 @@
 	// Client MQTT
 	//------------------------------------------------------------------------------------	
 	    //testsanto
-	    figure_div.id = "figure-div";
+	  figure_div.id = "figure-div";
           main_div.appendChild(figure_div);
           var websocket_type = mpl.get_websocket_type();
-          var websocket = new websocket_type("{{ ws_uri }}" + fig_id + "/ws");
+          var websocket = new websocket_type("{{ ws_marconicloud.it }}" + fig_id + "/ws");
           var uri = "{{ ws_uri }}" + fig_id + "/ws";
           if (window.location.protocol === "https:") uri = uri.replace('ws:', 'wss:')
           var websocket = new websocket_type(uri);
