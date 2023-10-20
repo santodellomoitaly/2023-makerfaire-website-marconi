@@ -295,6 +295,16 @@
 	                document.getElementById("sensore3:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore3:5").innerHTML = jsonData[i].pmSensor.PM25;
 			document.getElementById("sensore3:6").innerHTML = jsonData[i].timestamp;
+				}
+			else if(boardID == "weath-000000000001"){
+				// Update the HTML elements with the sensor data
+	                document.getElementById("sensore2:0").innerHTML = Math.trunc(jsonData[i].tempSensor.press);
+	                document.getElementById("sensore2:1").innerHTML = Math.trunc(jsonData[i].tempSensor.temp);
+	                document.getElementById("sensore2:2").innerHTML = jsonData[i].co2Sensor.eCO2;
+	                document.getElementById("sensore2:3").innerHTML = jsonData[i].co2Sensor.TVOC;
+	                document.getElementById("sensore2:4").innerHTML = jsonData[i].pmSensor.PM10;
+	                document.getElementById("sensore2:5").innerHTML = jsonData[i].pmSensor.PM25;
+			document.getElementById("sensore2:6").innerHTML = jsonData[i].timestamp;
 		}
             }
         }
