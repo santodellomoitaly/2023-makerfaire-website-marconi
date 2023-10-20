@@ -272,5 +272,10 @@
                 console.error('Error fetching JSON data:', error);
             });
 
-		
+
+		// Call the fetchDataAndRefresh function initially
+    fetch();
+
+    // Set an interval to call the fetchDataAndRefresh function every 5 seconds (5000 milliseconds)
+    setInterval(fetch, 5000);
 	</script>
