@@ -270,22 +270,23 @@
 		}
             }
         }
-		// Make an HTTP GET request to fetch JSON data
-        fetch('https://marconicloud.it/wsb-vrchat')
-            .then(response => response.json())
-            .then(data => {
-                // Call the function to update HTML with the fetched JSON data
-                updateHTML(data);
-		console.log("Updated data!")
-            })
-            .catch(error => {
-                console.error('Error fetching JSON data:', error);
-            });
+
+		function fetchJson(){
+			// Make an HTTP GET request to fetch JSON data
+		        fetch('https://marconicloud.it/wsb-vrchat')
+		            .then(response => response.json())
+		            .then(data => {
+		                // Call the function to update HTML with the fetched JSON data
+		                updateHTML(data);
+				console.log("Updated data!")
+		            })
+		            .catch(error => {
+		                console.error('Error fetching JSON data:', error);
+		            });
+			}
 
 
-		// Call the fetchDataAndRefresh function initially
-    fetch();
-
+	fetchJson();
     // Set an interval to call the fetchDataAndRefresh function every 5 seconds (5000 milliseconds)
-    setInterval(fetch, 2000);
+    setInterval(fetchJson, 2000);
 	</script>
