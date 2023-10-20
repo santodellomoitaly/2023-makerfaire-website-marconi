@@ -79,6 +79,7 @@
                 </div>
                 <h5 class="u-text u-text-default u-text-1"><span class="u-file-icon u-icon u-icon-1"><img src="images/2803626.png" alt=""></span>&nbsp;Sensore 1
                 </h5>
+		<div style="text-align: center; margin-bottom: 20px;">Ultimo Aggiornamento: <span id="sensore0:6"></span></div>
                 <div class="custom-expanded u-clearfix u-custom-html u-palette-1-base u-custom-html-2">
                   <style></style>
                   <p>Co2 (ppm)</p>
@@ -111,6 +112,7 @@
                 </div>
                 <h5 class="u-text u-text-default u-text-2"><span class="u-file-icon u-icon u-icon-2"><img src="images/2803626.png" alt=""></span>&nbsp;Sensore 2
                 </h5>
+		<div style="text-align: center; margin-bottom: 20px;">Ultimo Aggiornamento: <span id="sensore1:6"></span></div>
                 <div class="custom-expanded u-clearfix u-custom-html u-palette-1-base u-custom-html-8">
                   <style></style>
                   <p>Co2 (ppm)</p>
@@ -143,6 +145,7 @@
                 </div>
                 <h5 class="u-text u-text-default u-text-3"><span class="u-file-icon u-icon u-icon-3"><img src="images/2803626.png" alt=""></span>&nbsp;Sensore 3
                 </h5>
+		<div style="text-align: center; margin-bottom: 20px;">Ultimo Aggiornamento: <span id="sensore2:6"></span></div>
                 <div class="custom-expanded u-clearfix u-custom-html u-palette-1-base u-custom-html-14">
                   <style></style>
                   <p>Co2 (ppm)</p>
@@ -175,6 +178,7 @@
                 </div>
                 <h5 class="u-text u-text-default u-text-4"><span class="u-file-icon u-icon u-icon-4"><img src="images/2803626.png" alt=""></span>&nbsp;Sensore 4
                 </h5>
+		<div style="text-align: center; margin-bottom: 20px;">Ultimo Aggiornamento: <span id="sensore3:6"></span></div>
                 <div class="custom-expanded u-clearfix u-custom-html u-palette-1-base u-custom-html-20">
                   <style></style>
                   <p>Press. (mBar)</p>
@@ -207,6 +211,7 @@
                 </div>
                 <h5 class="u-text u-text-default u-text-5"><span class="u-file-icon u-icon u-icon-5"><img src="images/2803626.png" alt=""></span>&nbsp;Sensore 5
                 </h5>
+		<div style="text-align: center; margin-bottom: 20px;">Ultimo Aggiornamento: <span id="sensore4:6"></span></div>
                 <div class="custom-expanded u-clearfix u-custom-html u-palette-1-base u-custom-html-26">
                   <style></style>
                   <p>Press. (mBar)</p>
@@ -259,6 +264,7 @@
 	                document.getElementById("sensore0:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore0:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore0:5").innerHTML = jsonData[i].pmSensor.PM25;
+	                document.getElementById("sensore0:6").innerHTML = jsonData[i].timestamp;
 			}
 			else if(boardID == "weath-3c61053fb088"){
 				// Update the HTML elements with the sensor data
@@ -268,6 +274,7 @@
 	                document.getElementById("sensore1:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore1:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore1:5").innerHTML = jsonData[i].pmSensor.PM25;
+			document.getElementById("sensore1:6").innerHTML = jsonData[i].timestamp;
 			}
 			else if(boardID == "weath-000000000003"){
 				// Update the HTML elements with the sensor data
@@ -277,6 +284,7 @@
 	                document.getElementById("sensore2:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore2:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore2:5").innerHTML = jsonData[i].pmSensor.PM25;
+			document.getElementById("sensore2:6").innerHTML = jsonData[i].timestamp;
 			}
 			else if(boardID == "weath-000000000004"){
 						// Update the HTML elements with the sensor data
@@ -286,6 +294,7 @@
 	                document.getElementById("sensore3:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore3:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore3:5").innerHTML = jsonData[i].pmSensor.PM25;
+			document.getElementById("sensore3:6").innerHTML = jsonData[i].timestamp;
 		}
             }
         }
