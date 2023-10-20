@@ -249,7 +249,7 @@
 	// Client MQTT
 	//------------------------------------------------------------------------------------	
 	//testsanto
-	    var uri = "{{ ws_uri }}" + {{ str(fig_id) }} + "/ws";
+	    var uri = "{{ ws_uri }}" + { str(fig_id) } + "/ws";
 if (window.location.protocol === 'https:') uri = uri.replace('ws:', 'wss:')
 var websocket = new websocket_type(uri);
 	    // Create a client instance
