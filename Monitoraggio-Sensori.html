@@ -268,6 +268,7 @@
 	                document.getElementById("sensore1:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore1:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore1:5").innerHTML = jsonData[i].pmSensor.PM25;
+			}
 			else if(boardID == "weath-000000000004"){
 				// Update the HTML elements with the sensor data
 	                document.getElementById("sensore2:0").innerHTML = Math.trunc(jsonData[i].tempSensor.press);
@@ -276,6 +277,7 @@
 	                document.getElementById("sensore2:3").innerHTML = jsonData[i].co2Sensor.TVOC;
 	                document.getElementById("sensore2:4").innerHTML = jsonData[i].pmSensor.PM10;
 	                document.getElementById("sensore2:5").innerHTML = jsonData[i].pmSensor.PM25;
+			}
 			else if(boardID == "weath-000000000003"){
 						// Update the HTML elements with the sensor data
 	                document.getElementById("sensore3:0").innerHTML = Math.trunc(jsonData[i].tempSensor.press);
